@@ -3,8 +3,7 @@
 #include <stdio.h>
 /**
 * main - Entry point
-*  *
-* Description: Prints whether a randomly assigned number is positive, negative, or zero
+*
 *
 * Return: Always 0 (Success)
 */

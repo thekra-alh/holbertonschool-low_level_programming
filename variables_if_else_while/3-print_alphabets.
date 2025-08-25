@@ -1,14 +1,17 @@
 #include <stdio.h>
 
 /**
- * main - Entry poinit
+ * main - Entry point
  *
- * Return: Always 0
+ * Description: Prints the alphabet in lowercase,
+ * then in uppercase using putchar
+ *
+ * Return: Always 0 (Success)
  */
-
 int main(void)
 {
-    char lower, upper;
+    char lower;
+    char upper;
 
     for (lower = 'a'; lower <= 'z'; lower++)
         putchar(lower);

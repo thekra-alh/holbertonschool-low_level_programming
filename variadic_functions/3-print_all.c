@@ -3,45 +3,42 @@
 #include <stdarg.h>
 
 /**
-* print_all - Prints anything based on a format string
-* @format: List of argument types passed to the function
+* print_all - Prints anything based on format
+* @format: A list of types of arguments passed to the function
 *
 * Return: void
 */
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	unsigned int i = 0;
-	char *str;
-	char *separator = "";
+	unsigned int i = 0, j = 0;
+	char *str, *sep = "";
+	char fmts[] = {'c', 'i', 'f', 's'};
+	void (*printers[4])(va_list) = {
+		[](va_list a) { printf("%c", va_arg(a, int)); },
+		[](va_list a) { printf("%d", va_arg(a, int)); },
+		[](va_list a) { printf("%f", va_arg(a, double)); },
+		[](va_list a)
+		{
+			str = va_arg(a, char *);
+			printf("%s", str ? str : "(nil)");
+		}
+	};
 
 	va_start(args, format);
 
 	while (format && format[i])
 	{
-		while (format[i] && (format[i] != 'c' && format[i] != 'i' &&
-			format[i] != 'f' && format[i] != 's'))
-			i++;
+		j = 0;
+		while (j < 4 && format[i] != fmts[j])
+			j++;
 
-		if (!format[i])
-			break;
-
-		printf("%s", separator);
-
-		if (format[i] == 'c')
-			printf("%c", va_arg(args, int));
-		if (format[i] == 'i')
-			printf("%d", va_arg(args, int));
-		if (format[i] == 'f')
-			printf("%f", va_arg(args, double));
-		if (format[i] == 's')
+		if (j < 4)
 		{
-			str = va_arg(args, char *);
-			str = (str != NULL) ? str : "(nil)";
-			printf("%s", str);
+			printf("%s", sep);
+			printers[j](args);
+			sep = ", ";
 		}
-
-		separator = ", ";
 		i++;
 	}
 

@@ -3,44 +3,43 @@
 #include <stdarg.h>
 
 /**
-* print_all - Prints anything, based on format string
-* @format: List of types of arguments passed to the function
+* print_all - Prints anything based on format string
+* @format: A list of types of arguments passed to the function
 *
-* Return: 0 (SUCCESS)
+* Return: 0 (Success)
 */
 int print_all(const char * const format, ...)
 {
 	va_list args;
-	int i = 0, j;
-	char *str, *sep = "";
-	char types[] = {'c', 'i', 'f', 's'};
+	int i = 0;
+	char *str;
+	char *sep = "";
 
 	va_start(args, format);
 
 	while (format && format[i])
 	{
-		j = 0;
-		while (j < 4)
+		switch (format[i])
 		{
-			if (format[i] == types[j])
-			{
-				printf("%s", sep);
-				if (j == 0)
-					printf("%c", va_arg(args, int));
-				if (j == 1)
-					printf("%d", va_arg(args, int));
-				if (j == 2)
-					printf("%f", va_arg(args, double));
-				if (j == 3)
-				{
-					str = va_arg(args, char *);
-					if (!str)
-						str = "(nil)";
-					printf("%s", str);
-				}
+			case 'c':
+				printf("%s%c", sep, va_arg(args, int));
 				sep = ", ";
-			}
-			j++;
+				break;
+			case 'i':
+				printf("%s%d", sep, va_arg(args, int));
+				sep = ", ";
+				break;
+			case 'f':
+				printf("%s%f", sep, va_arg(args, double));
+				sep = ", ";
+				break;
+			case 's':
+				str = va_arg(args, char *);
+				if (!str)
+					str = "(nil)";
+				printf("%s%s", sep, str);
+				sep = ", ";
+				break;
 		}
 		i++;
 	}

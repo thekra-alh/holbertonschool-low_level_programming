@@ -7,9 +7,9 @@
 #define BUF 1024
 
 /**
- * close_or_die - close fd or exit 100
- * @fd: file descriptor
- */
+* close_or_die - close fd or exit 100
+* @fd: file descriptor
+*/
 static void close_or_die(int fd)
 {
  if (close(fd) == -1)
@@ -20,13 +20,13 @@ static void close_or_die(int fd)
 }
 
 /**
- * read_retry - read with EINTR retry; exit 98 on error
- * @fd: src fd
- * @buf: buffer
- * @n: bytes to read
- * @name: src filename (for message)
- * Return: bytes read (>= 0)
- */
+* read_retry - read with EINTR retry; exit 98 on error
+* @fd: src fd
+* @buf: buffer
+* @n: bytes to read
+* @name: src filename (for message)
+* Return: bytes read (>= 0)
+*/
 static ssize_t read_retry(int fd, char *buf, size_t n, const char *name)
 {
  ssize_t r;
@@ -44,12 +44,12 @@ static ssize_t read_retry(int fd, char *buf, size_t n, const char *name)
 }
 
 /**
- * write_all - write all n bytes (handles short writes/EINTR), exit 99 on error
- * @fd: dst fd
- * @name: dst filename (for message)
- * @buf: data
- * @n: bytes to write
- */
+* write_all - write all n bytes (handles short writes/EINTR), exit 99 on error
+* @fd: dst fd
+* @name: dst filename (for message)
+* @buf: data
+* @n: bytes to write
+*/
 static void write_all(int fd, const char *name, const char *buf, ssize_t n)
 {
  ssize_t off = 0, w;
@@ -70,11 +70,11 @@ static void write_all(int fd, const char *name, const char *buf, ssize_t n)
 }
 
 /**
- * main - copy file_from to file_to (1 KiB buffer)
- * @ac: argc
- * @av: argv
- * Return: 0 on success
- */
+* main - copy file_from to file_to (1 KiB buffer)
+* @ac: argc
+* @av: argv
+* Return: 0 on success
+*/
 int main(int ac, char **av)
 {
  int f_from, f_to;

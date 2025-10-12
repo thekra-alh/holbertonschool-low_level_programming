@@ -1,5 +1,6 @@
 #ifndef LISTS_H
 #define LISTS_H
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
 
 #include <stddef.h>
 
